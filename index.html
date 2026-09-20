@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSE L06a — Fan & Duct Systems · 通風機與風管系統</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🌀 BSE L06a — Fan and Duct Systems: Aerodynamics & Design</h1>
+    <p>通風機氣動特性、風機定律、風管水力阻力與管網設計 · Lecture 6a · BSE</p>
+    <p>25 條選擇題 + 5 條計算簡答題 · 12 幅 SCADA 工業級動態向量原理圖 · Bilingual 中英對照</p>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value" id="timer">90:00</div>
+      <div class="stat-label">Time Left / 剩餘時間</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="answeredCount">0/25</div>
+      <div class="stat-label">Answered / 已答題數</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="scoreDisplay">-</div>
+      <div class="stat-label">Score / 測驗得分</div>
+    </div>
+    <div style="width:100%;">
+      <div class="progress-container"><div class="progress-fill" id="progressBar"></div></div>
+    </div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="score-circle" id="scoreCircle"><div class="score-text" id="finalScore">0%</div></div>
+    <div class="result-msg" id="resultMsg">Done!</div>
+    <div class="review-section" id="reviewSection"></div>
+    <div style="margin-top:20px;">
+      <button class="btn btn-secondary" onclick="location.reload()">Restart / 重新開始</button>
+    </div>
+  </div>
+
+  <nav class="tab-nav" id="tabNav">
+    <button class="tab-btn active" onclick="showSection('notes')">📚 Notes 筆記 (含 SCADA 原理圖)</button>
+    <button class="tab-btn" onclick="showSection('part1')">📋 MC (25)</button>
+    <button class="tab-btn" onclick="showSection('part2')">✏️ Short Q (5)</button>
+  </nav>
+
+  <!-- NOTES TAB -->
+  <section id="notesSection" class="section active">
+    <div class="intro-card">
+      <h3>👋 歡迎來到第六講(a)！ / Welcome to Lecture 6a!</h3>
+      <p>本講主題為 <strong>通風機與風管水力系統 (Fan and Duct System)</strong>，是暖通空調氣流輸送的核心骨幹。內容深入解析<strong>三大風機分類（軸流式、離心式與螺旋槳式）</strong>、<strong>風機全壓/靜壓/動壓皮托管測量</strong>、<strong>風機定律（Fan Laws）與三次方軸功率關係</strong>、<strong>前傾/後傾/機翼型葉片性能與防過載特性</strong>、<strong>導葉軸流風機與反轉排煙應用</strong>、<strong>變頻（VFD）與入口導葉（IGV）調風機制</strong>、<strong>風機與管網工況點匹配（$\Delta P = R V^2$）</strong>、<strong>風機串聯增壓與並聯倍流</strong>、<strong>AHU 空調系統全壓/靜壓沿程梯度分佈</strong>、<strong>達西公式、Moody 圖與 Huebscher 矩形等效管徑推導</strong>，以及<strong>風管局部阻力與保溫隔氣層設計</strong>。每節均配備高精度動態圖解！</p>
+    </div>
+
+    <div class="toc">
+      <h3>📑 Table of Contents / 課題目錄</h3>
+      <ol>
+        <li><a href="#t1">Fan Classifications: Axial, Centrifugal & Propeller / 風機三大類型與氣流幾何方向</a></li>
+        <li><a href="#t2">Pressure Definitions & Pitot-Static Tube Measurement / 全壓、動壓、靜壓與皮托管測量</a></li>
+        <li><a href="#t3">Fan Power & Energy Efficiency Formulations / 風機軸功率、全壓效率與靜壓效率</a></li>
+        <li><a href="#t4">The Fan Laws (Affinity Laws) & Speed/Density Changes / 風機定律、三次方功率關係與 10% 提速效應</a></li>
+        <li><a href="#t5">Centrifugal Fan Blade Types: Forward, Backward & Radial / 離心葉輪剖析：前傾、後傾、機翼型與防過載特性</a></li>
+        <li><a href="#t6">Axial Fan Types: Tubeaxial, Vaneaxial & Reverse Operation / 軸流風機構造、導葉靜壓轉換與樓梯防煙反轉運行</a></li>
+        <li><a href="#t7">Airflow Control: Fan Speed (VFD), IGV & Blade Pitch / 風量調控手段：變頻驅動、入口導葉與葉片變距</a></li>
+        <li><a href="#t8">Fan Operating Point & Selection Criteria / 風機-管網工況點確定與工程選型考量</a></li>
+        <li><a href="#t9">Fans in Series vs Parallel Operation / 風機串聯增壓 vs 並聯倍流與止回風閥</a></li>
+        <li><a href="#t10">Total & Static Pressure Distribution across an AHU System / 空調風道全壓與靜壓沿程分佈分析</a></li>
+        <li><a href="#t11">Duct Frictional Losses, Darcy Formula & Equivalent Diameter / 達西摩擦阻力公式、Moody 圖與 Huebscher 等效直徑</a></li>
+        <li><a href="#t12">Dynamic Losses in Fittings & Thermal/Acoustic Insulation / 局部阻力系數 Co、風速分級與防結露保溫隔氣層</a></li>
+      </ol>
+    </div>
+
+    <div id="notesContainer"></div>
+  </section>
+
+  <!-- MC TAB -->
+  <section id="part1Section" class="section">
+    <div class="intro-card">
+      <h3>📋 Multiple Choice Questions (25 題選擇題)</h3>
+      <p>題目涵蓋 Lecture 6a 所有空氣動力學參數、風機定律計算、葉輪特性對比、等效管徑公式與隔氣層規範。點擊選項作答，最後按 <strong>Submit MC</strong> 查看詳細中英文解說與成績。</p>
+    </div>
+    <div id="mcContainer"></div>
+    <div class="action-btns">
+      <button class="btn btn-success" onclick="submitMC()">Submit MC / 提交並查看成績與解釋</button>
+    </div>
+  </section>
+
+  <!-- SHORT Q TAB -->
+  <section id="part2Section" class="section">
+    <div class="intro-card">
+      <h3>✏️ Short Answer Questions (5 題計算與工程分析簡答題)</h3>
+      <p>包含風機定律 10% 提速推導、Huebscher 等效管徑水力計算、葉片防過載選型比選、AHU 全壓分佈計算及風機串並聯阻力分析。請先自行思考作答，再點擊按鈕查看 Model Answer 與評分要點。</p>
+    </div>
+    <div id="shortContainer"></div>
+    <div class="action-btns">
+      <button class="btn btn-primary" onclick="showAnswers()">Show All Answers / 顯示所有參考答案</button>
+    </div>
+  </section>
+</div>
+
+<button class="to-top" id="toTop" onclick="window.scrollTo({top:0, behavior:'auto'})" title="Back to top">↑</button>
+
+<script src="app.js"></script>
+</body>
+</html>
